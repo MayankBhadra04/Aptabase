@@ -3,3 +3,4 @@
 Secrets*.toml
 Cargo.lock
 .idea.shuttle*
+.idea
