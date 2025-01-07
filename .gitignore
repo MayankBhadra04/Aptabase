@@ -2,4 +2,4 @@
 .shuttle-storage
 Secrets*.toml
 Cargo.lock
-.idea
+.idea.shuttle*

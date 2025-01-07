@@ -3,19 +3,24 @@ mod view;
 mod admin;
 mod auth;
 
+use std::fs;
 use std::fs::File;
 use std::io::Read;
+use std::path::PathBuf;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{ HttpResponse,  web::{self, ServiceConfig}};
+use actix_web::{HttpResponse, web::{self, ServiceConfig}, HttpRequest, Responder};
 use shuttle_actix_web::ShuttleActixWeb;
 use sqlx::{FromRow, PgPool};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 use actix_web::web::Data;
+use include_dir::{include_dir, Dir};
 use crate::admin::admin_config;
 use crate::auth::auth_config;
 use crate::view::view_config;
+
+const STATIC_DIR: Dir = include_dir!("./src/static");
 
 #[derive(Clone)]
 struct AppState {
@@ -87,7 +92,9 @@ async fn actix_web(
                 .app_data(state),
         );
         cfg.route("/", web::get().to(index));
-        cfg.service(actix_files::Files::new("/static", "./src/static"));
+        cfg.route("/{file_name:.*}", web::get().to(serve_static_file));
+
+
     };
     println!("All set!");
     Ok(config.into())
@@ -99,3 +106,28 @@ async fn index() -> HttpResponse {
         .content_type("text/html")
         .body(include_str!("static/index.html"))
 }
+
+async fn serve_static_file(file_name: web::Path<String>) -> HttpResponse {
+    let file = STATIC_DIR.get_file(file_name.as_str());
+
+    match file {
+        Some(file) => {
+            // Automatically set the content type based on the file extension
+            let content_type = if file_name.as_str().ends_with(".css") {
+                "text/css"
+            } else if file_name.as_str().ends_with(".js") {
+                "application/javascript"
+            } else if file_name.as_str().ends_with(".html") {
+                "text/html"
+            } else {
+                "application/octet-stream"
+            };
+
+            HttpResponse::Ok()
+                .content_type(content_type)
+                .body(file.contents())
+        }
+        None => HttpResponse::NotFound().body("File not found"),
+    }
+}
+
