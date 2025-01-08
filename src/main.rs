@@ -38,14 +38,9 @@ struct Entry {
     reference: String
 }
 
-async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), sqlx::Error> {
-    // Read SQL file
-    let mut file = File::open(filename)?;
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
-
+async fn execute_queries_from_str(pool: &PgPool, sql: &str) -> Result<(), sqlx::Error> {
     // Split queries by delimiter (;)
-    let queries: Vec<&str> = contents.split(';').collect();
+    let queries: Vec<&str> = sql.split(';').collect();
 
     // Execute each query
     for query in queries {
@@ -63,13 +58,13 @@ async fn actix_web(
     #[shuttle_shared_db::Postgres] pool: PgPool,
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
 
-    match execute_queries_from_file(&pool, "./migrations/0001_aptamer.sql").await {
-        Ok(_) => {}
-        Err(e) => {
-            println!("{}", e.to_string());
-        }
+    let sql = include_str!("../migrations/0001_aptamer.sql");
+
+    match execute_queries_from_str (&pool, sql).await {
+        Ok(_) => println!("Database migration successful"),
+        Err(e) => eprintln!("Error during migration: {}", e),
     }
-    println!("Database migration successful");
+
     let state: Data<AppState> = Data::new(AppState { pool });
 
     let config = move |cfg: &mut ServiceConfig| {
@@ -93,6 +88,7 @@ async fn actix_web(
         );
         cfg.route("/", web::get().to(index));
         cfg.route("/{file_name:.*}", web::get().to(serve_static_file));
+        cfg.route("/static/{file_name:.*}", web::get().to(serve_static_file));
 
 
     };

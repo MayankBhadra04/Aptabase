@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Get keyword input
     const keyword = document.getElementById('keyword').value.toLowerCase();
-    fetch(`https://aptabase.shuttleapp.rs/v1/fetch/${keyword}`)
+    fetch(`https://peptabase-ixik.shuttle.app/v1/fetch/${keyword}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+      console.log(response);
       return response.json();
     })
     .then(data => {
