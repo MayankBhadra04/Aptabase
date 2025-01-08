@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(JSON.stringify(formData))
   
       // Make the API call
-      fetch('http://aptabase.shuttleapp.rs/v1/insert', {
+      fetch('http://peptabase-ixik.shuttle.app/v1/insert', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

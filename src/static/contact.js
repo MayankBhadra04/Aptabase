@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       console.log(JSON.stringify(formData))
       // Call API to submit comment
-      fetch('https://aptabase.shuttleapp.rs/v1/comment', {
+      fetch('https://peptabase-ixik.shuttle.app/v1/comment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

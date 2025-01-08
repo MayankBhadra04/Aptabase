@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Make the API call
           try {
-            fetch('https://aptabase.shuttleapp.rs/v1/auth/login', {
+            fetch('https://peptabase-ixik.shuttle.app/v1/auth/login', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

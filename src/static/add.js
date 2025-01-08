@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(JSON.stringify(formData))
 
     // Make the API call with authtoken included in the header
-    fetch('http://aptabase.shuttleapp.rs/v1/admin/insert', {
+    fetch('http://peptabase-ixik.shuttle.app/v1/admin/insert', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to handle action button click
     const handleAction = (itemId, action) => {
         // Call another API with itemId and action
-        fetch('https://aptabase.shuttleapp.rs/v1/admin/approve', {
+        fetch('https://peptabase-ixik.shuttle.app/v1/admin/approve', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Fetch data from API
-    fetch('https://aptabase.shuttleapp.rs/v1/admin/view', {
+    fetch('https://peptabase-ixik.shuttle.app/v1/admin/view', {
         method : 'GET',
         headers: {
             'Authorization': `Bearer ${authToken}` // Include auth token in the header

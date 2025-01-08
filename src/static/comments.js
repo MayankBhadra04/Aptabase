@@ -9,7 +9,7 @@ window.onload = function() {
 }
 
 function fetchComments(authToken) {
-    const apiUrl = 'https://aptabase.shuttleapp.rs/v1/admin/comment'; 
+    const apiUrl = 'https://peptabase-ixik.shuttle.app/v1/admin/comment'; 
     fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -59,7 +59,7 @@ function deleteComment(commentId) {
     // Implement the logic to delete the comment with the specified ID
     // You can make a fetch request to the server to delete the comment
     // Example:
-    const apiUrl = `https://aptabase.shuttleapp.rs/v1/admin/deletecomment/${commentId}`;
+    const apiUrl = `https://peptabase-ixik.shuttle.app/v1/admin/deletecomment/${commentId}`;
     fetch(apiUrl, {
         method: 'DELETE',
         headers: {

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function fetchAndPopulateData() {
       const authToken = localStorage.getItem('authtoken');
-      fetch(`https://aptabase.shuttleapp.rs/v1/adminfetch/fetchadmin`, {
+      fetch(`https://peptabase-ixik.shuttle.app/v1/adminfetch/fetchadmin`, {
           headers: {
               'Authorization': `Bearer ${authToken}`
           }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to handle action button click
   function handleAction(itemId) {
-      fetch(`https://aptabase.shuttleapp.rs/v1/admin/delete/${itemId}`, { // Fixed typo here from delele to delete
+      fetch(`https://peptabase-ixik.shuttle.app/v1/admin/delete/${itemId}`, { // Fixed typo here from delele to delete
           method: 'DELETE'
       })
       .then(response => {

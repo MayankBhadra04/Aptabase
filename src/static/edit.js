@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // and populate the form fields with the fetched data
 
     // For example:
-    fetch(`https://aptabase.shuttleapp.rs/v1/fetch/${itemId}`, {
+    fetch(`https://peptabase-ixik.shuttle.app/v1/fetch/${itemId}`, {
         headers: {
             'Authorization': `Bearer ${authToken}`
         }
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Send updated data to the server
-        fetch(`https://aptabase.shuttleapp.rs/v1/update/${itemId}`, {
+        fetch(`https://peptabase-ixik.shuttle.app/v1/update/${itemId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
