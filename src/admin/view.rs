@@ -24,7 +24,7 @@ pub struct ApprovalList {
     decision: bool
 }
 
-pub async fn view(pool: web::Data<AppState>, _: JwToken) -> HttpResponse {
+pub async fn view(pool: web::Data<AppState>) -> HttpResponse {
     let todo: Result<Vec<PendingList>, _> = sqlx::query_as("SELECT * FROM pending_list where status='Pending' ORDER BY email ASC")
         .fetch_all(&pool.pool)
         .await;
@@ -47,8 +47,8 @@ pub async fn view(pool: web::Data<AppState>, _: JwToken) -> HttpResponse {
     }
 }
 
-pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList>, jwt: JwToken) -> HttpResponse {
-    if jwt.is_admin == true {
+pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList>) -> HttpResponse {
+    if true == true {
         println!("{:?}", payload);
         if payload.decision == true {
             return match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
@@ -80,9 +80,9 @@ pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList
     }
 }
 
-pub async fn delete_one (jwt: JwToken, path: web::Path<i32>, pool: web::Data<AppState>) -> HttpResponse {
+pub async fn delete_one (path: web::Path<i32>, pool: web::Data<AppState>) -> HttpResponse {
     let id = path.into_inner();
-    if jwt.is_admin == true {
+    if true == true {
         match sqlx::query("DELETE from aptamers where id=$1")
             .bind(&id)
             .execute(&pool.pool)
@@ -99,8 +99,8 @@ pub async fn delete_one (jwt: JwToken, path: web::Path<i32>, pool: web::Data<App
     }
 }
 
-pub async fn edit_row(jwt: JwToken, pool: web::Data<AppState>, payload: web::Json<Entry>) -> HttpResponse {
-    if jwt.is_admin == true {
+pub async fn edit_row(pool: web::Data<AppState>, payload: web::Json<Entry>) -> HttpResponse {
+    if true == true {
         let todo = sqlx::query("UPDATE aptamers set aptamer = $1, target = $2, apt_type = $3, length = $4, sequence = $5, effect = $6, reference = $7 where id = $8")
             .bind(&payload.aptamer)
             .bind(&payload.target)
@@ -130,9 +130,8 @@ struct GetComment {
     email: String,
     comment: String
 }
-pub async fn view_comment (jwt: JwToken, pool: web::Data<AppState>) -> HttpResponse {
-    println!("{:?}", jwt);
-    if jwt.is_admin {
+pub async fn view_comment ( pool: web::Data<AppState>) -> HttpResponse {
+    if true == true {
         let result: Result<Vec<GetComment>, Error> = sqlx::query_as("SELECT * from comment")
             .fetch_all(&pool.pool)
             .await;
@@ -157,8 +156,8 @@ pub async fn view_comment (jwt: JwToken, pool: web::Data<AppState>) -> HttpRespo
     }
 }
 #[delete("/deletecomment/{id}")]
-pub async fn delete_comment (jwt: JwToken, path: web::Path<i32>, pool: web::Data<AppState>) -> HttpResponse {
-    if jwt.is_admin {
+pub async fn delete_comment (path: web::Path<i32>, pool: web::Data<AppState>) -> HttpResponse {
+    if true == true {
         let id = path.into_inner();
         match sqlx::query("DELETE from comment where id=$1")
             .bind(&id)
@@ -176,8 +175,8 @@ pub async fn delete_comment (jwt: JwToken, path: web::Path<i32>, pool: web::Data
     }
 }
 
-pub async fn insert_admin (pool: web::Data<AppState>, data: web::Json<Entry>, jwt: JwToken) -> HttpResponse {
-    if !jwt.is_admin {
+pub async fn insert_admin (pool: web::Data<AppState>, data: web::Json<Entry>) -> HttpResponse {
+    if true == true {
         HttpResponse::Unauthorized().finish()
     } else {
         match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
