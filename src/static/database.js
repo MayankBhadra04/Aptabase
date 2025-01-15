@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const authToken = localStorage.getItem('authtoken');
       fetch(`https://peptabase-ixik.shuttle.app/v1/adminfetch/fetchadmin`, {
           headers: {
-              'Authorization': `Bearer ${authToken}`
+              'token': `${authToken}`
           }
       })
       .then(response => {

@@ -104,7 +104,7 @@ async fn index() -> HttpResponse {
 }
 
 async fn serve_static_file(file_name: web::Path<String>) -> HttpResponse {
-    let file = STATIC_DIR.get_file(file_name.as_str());
+    let file = STATIC_DIR.get_file(file_name.strip_prefix("static/").unwrap_or(file_name.as_str()));
 
     match file {
         Some(file) => {
