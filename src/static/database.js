@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Redirect to admin login page if auth token is not present
   if (!authToken) {
-      window.location.href = '/static/admin.html';
+      window.location.href = 'admin.html';
   } else {
       fetchAndPopulateData(); // Call function to fetch and populate data
   }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
     function handleEdit(itemId) {
-        window.location.href = `/static/edit.html/${itemId}`;
+        window.location.href = `edit.html/${itemId}`;
     }
 
 });

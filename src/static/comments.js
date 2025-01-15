@@ -1,7 +1,7 @@
 window.onload = function() {
     const authToken = localStorage.getItem('authtoken');
     if (!authToken) {
-        window.location.href = '/static/admin.html'; // R
+        window.location.href = 'admin.html'; // R
         console.log("Token not found!")// edirect to the admin login page if authentication token is not present
     } else {
         fetchComments(authToken);

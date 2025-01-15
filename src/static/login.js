@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       const token = response.headers.get('token');
                       console.log(token);
                       localStorage.setItem('authtoken', token);
-                      window.open("/static/redirect_links.html", "_blank")
+                      window.open("redirect_links.html", "_blank")
                   } else {
                       window.alert("Wrong credentials")
                   }

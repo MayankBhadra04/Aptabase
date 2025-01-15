@@ -10,7 +10,7 @@
       window.onload = function() {
         const authToken = localStorage.getItem('authtoken');
         if (!authToken) {
-          window.location.href = '/static/admin.html'; // Redirect to the login page
+          window.location.href = 'admin.html'; // Redirect to the login page
         }
       }
     </script>
@@ -24,15 +24,15 @@
         </div>
         <div class="m_navbar">
             <a href="/" rel="noreferrer" >Home</a>
-            <a href="/static/about.html" rel="noreferrer">About Us</a>
-            <a href="/static/submit.html" rel="noreferrer">Submit</a>
-            <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
-            <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
+            <a href="about.html" rel="noreferrer">About Us</a>
+            <a href="submit.html" rel="noreferrer">Submit</a>
+            <a href="contact.html"  rel="noreferrer">Contact Us</a>
+            <a href="admin.html" rel="noreferrer">Admin Login</a>
         </div>
 
         <!-- Table will be populated by JavaScript -->
         <div>
-            <a href="/static/add.html">
+            <a href="add.html">
             <button  style="background-color: #007bff; color: #fff; padding: 10px 20px; font-size: 16px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s;">
                 Add
             </button>
@@ -59,6 +59,6 @@
         </div>
     </div>
 
-    <script src="/static/database.js"></script>
+    <script src="database.js"></script>
 </body>
 </html>

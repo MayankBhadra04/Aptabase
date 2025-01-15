@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log('Data updated successfully:', data);
             // Redirect to some page after successful update
-            window.location.href = '/static/success.html';
+            window.location.href = 'success.html';
         })
         .catch(error => {
             console.error('Error updating data:', error);

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const authToken = localStorage.getItem('authtoken');
     if (!authToken) {
         // Redirect to admin login page if authtoken is not present
-        window.location.href = '/static/admin.html';
+        window.location.href = 'admin.html';
         return;
     }
 
